@@ -21,18 +21,17 @@ import model.Ahorcado;
 public class Servidor {
 
     public Servidor() throws IOException {
-          
-        while(true) {            
-            ServerSocket server = new ServerSocket(3000); 
+          ServerSocket server = new ServerSocket(3000); 
+        while(true) {           
             Socket cliente = server.accept();
             ClienteHilo ch = new ClienteHilo(cliente);
-            ch.run();
+            ch.start();
         }
     }        
     
 }
 
-class ClienteHilo implements Runnable{
+class ClienteHilo extends Thread {
     
     ObjectInputStream reader;
     ObjectOutputStream writer;
